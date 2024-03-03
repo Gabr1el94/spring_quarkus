@@ -14,10 +14,18 @@ import com.br.gabproject.simpleproject.model.Client;
 import com.br.gabproject.simpleproject.model.domain.ClientBody;
 import com.br.gabproject.simpleproject.respository.ClientRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Tag(name = "Client", description = "Tutorial management APIs")
 @RestController
 @RequestMapping("clients")
 public class ClientController {
@@ -25,6 +33,13 @@ public class ClientController {
     @Autowired
     private ClientRepository clientRepository;
 
+    @Operation(summary = "All Clients", description = "Get a Tutorial object by specifying all clients", tags = {
+            "tutorials", "get", "list" })
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(schema = @Schema(implementation = Client.class), mediaType = "application/json")
+            })
+    })
     @GetMapping("/")
     public ResponseEntity<?> listAll() {
         return new ResponseEntity<List<Client>>(clientRepository.listAll(), HttpStatus.ACCEPTED);
@@ -43,6 +58,15 @@ public class ClientController {
         return new ResponseEntity<>("Falha ao inserir os dados do cliente", HttpStatus.CONFLICT);
     }
 
+    @Operation(summary = "Find Client", description = "Get a Tutorial object by specifying find client by id", tags = {
+            "tutorials", "get", "id" })
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(schema = @Schema(implementation = Client.class), mediaType = "application/json")
+            }),
+            @ApiResponse(responseCode = "404", description = "Client not found by id", content = {
+                    @Content(schema = @Schema()) }),
+    })
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getbyID(@PathVariable int id) {
         Client client = clientRepository.findById(id);
