@@ -41,8 +41,10 @@ public class ClientController {
             })
     })
     @GetMapping("/")
-    public ResponseEntity<?> listAll() {
-        return new ResponseEntity<List<Client>>(clientRepository.listAll(), HttpStatus.ACCEPTED);
+    public ResponseEntity<List<Client>> listAll() {
+        List<Client> clients = clientRepository.listAll();
+        System.out.println(clients.size());
+        return new ResponseEntity<>(clients, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/")

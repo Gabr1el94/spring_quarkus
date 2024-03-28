@@ -1,11 +1,19 @@
 package com.br.gabproject.simpleproject.model;
 
-public class Client {
+import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Client implements Serializable {
+
+    @JsonProperty("idPessoa")
     private int idPessoa;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("email")
     private String email;
 
     public Client() {
