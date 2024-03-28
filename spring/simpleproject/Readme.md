@@ -6,7 +6,7 @@
 - Postgresql;
 - Spring boot 3;
 - Swagger;
-- JUnit 4;
+- 
 
 ## Reference Documentation
 For further reference, please consider the following sections:
@@ -57,24 +57,15 @@ The following guides illustrate how to use some features concretely:
 **2.3.1 Build maven native:**
 
 ```
- mvn -Pnative native:compile
+mvn -PnativeTest -DskipNativeTests=true -DskipNativeBuild=true -Dagent=true test
+```
+
+```
+mvn -Pnative native:compile -Dagent=true -DskipTests package
 ```
 
 **2.3.2 Start project:**
 
 ```
  ./target/simpleproject
-```
-
-#### 2.4 Create a native docker image:
-
-
-**2.4.1 Build maven native for docker:**
-```
-mvn -Pnative spring-boot:build-image
-```
-
-**2.4.2 Start with the docker:**
-```
-docker run --rm -p 8090:8090 docker.io/library/simpleproject:0.0.1-SNAPSHOT
 ```
