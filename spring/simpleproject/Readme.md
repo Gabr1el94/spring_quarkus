@@ -6,7 +6,6 @@
 - Postgresql;
 - Spring boot 3;
 - Swagger;
-- 
 
 ## Reference Documentation
 For further reference, please consider the following sections:
