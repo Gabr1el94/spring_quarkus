@@ -6,6 +6,8 @@ public class ClientBody {
 
     private String email;
 
+    private String password;
+
     public ClientBody() {
     }
 
@@ -35,6 +37,20 @@ public class ClientBody {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return String return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

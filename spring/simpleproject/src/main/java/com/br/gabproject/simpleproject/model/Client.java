@@ -2,7 +2,6 @@ package com.br.gabproject.simpleproject.model;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Client implements Serializable {
@@ -15,6 +14,9 @@ public class Client implements Serializable {
 
     @JsonProperty("email")
     private String email;
+
+    @JsonProperty("password")
+    private String password;
 
     public Client() {
     }
@@ -66,12 +68,27 @@ public class Client implements Serializable {
         this.email = email;
     }
 
+    /**
+     * @return String return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 " idPessoa='" + getIdPessoa() + "'" +
                 ", name='" + getName() + "'" +
                 ", email='" + getEmail() + "'" +
+                ", password='" + getPassword() + "'" +
                 "}";
     }
 
