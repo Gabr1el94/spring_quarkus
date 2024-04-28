@@ -2,6 +2,7 @@ package com.br.gabproject.simpleproject.model;
 
 import java.io.Serializable;
 
+import com.br.gabproject.simpleproject.model.mapper.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Client implements Serializable {
@@ -17,6 +18,8 @@ public class Client implements Serializable {
 
     @JsonProperty("password")
     private String password;
+
+    private RoleEnum role;
 
     public Client() {
     }
@@ -80,6 +83,20 @@ public class Client implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return RoleEnum return the role
+     */
+    public String getRole() {
+        return role.name();
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = RoleEnum.valueOf(role);
     }
 
     @Override
