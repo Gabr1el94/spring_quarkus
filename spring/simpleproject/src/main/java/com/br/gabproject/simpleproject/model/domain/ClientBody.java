@@ -8,6 +8,8 @@ public class ClientBody {
 
     private String password;
 
+    private String role;
+
     public ClientBody() {
     }
 
@@ -51,6 +53,20 @@ public class ClientBody {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return String return the role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

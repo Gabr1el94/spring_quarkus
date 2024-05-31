@@ -19,6 +19,7 @@ public class Client implements Serializable {
     @JsonProperty("password")
     private String password;
 
+    @JsonProperty("role")
     private RoleEnum role;
 
     public Client() {
