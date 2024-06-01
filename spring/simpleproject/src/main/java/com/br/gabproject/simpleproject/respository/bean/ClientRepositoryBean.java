@@ -33,7 +33,7 @@ public class ClientRepositoryBean implements ClientRepository {
 
     @Override
     public int addClient(Client client) {
-        return jdbcTemplate.update("INSERT INTO CLIENT(NAME, EMAIL) VALUES (?, ?)",
+        return jdbcTemplate.update("INSERT INTO CLIENT(NAME, EMAIL, PASSWORD, ROLE) VALUES (?, ?)",
                 client.getName(),
                 client.getEmail());
     }
