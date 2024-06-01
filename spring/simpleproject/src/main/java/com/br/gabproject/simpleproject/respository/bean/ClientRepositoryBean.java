@@ -33,16 +33,19 @@ public class ClientRepositoryBean implements ClientRepository {
 
     @Override
     public int addClient(Client client) {
-        return jdbcTemplate.update("INSERT INTO CLIENT(NAME, EMAIL, PASSWORD, ROLE) VALUES (?, ?)",
+        return jdbcTemplate.update("INSERT INTO CLIENT(NAME, EMAIL, PASSWORD, ROLE) VALUES (?, ?, ?, ?)",
                 client.getName(),
-                client.getEmail());
+                client.getEmail(),
+                client.getPassword(),
+                client.getRole());
     }
 
     @Override
     public int updateClient(Client client, int id) {
-        return jdbcTemplate.update("UPDATE CLIENT SET NAME = ?, EMAIL = ? WHERE IDPESSOA = ?",
+        return jdbcTemplate.update("UPDATE CLIENT SET NAME = ?, EMAIL = ? , ROLE = ? WHERE IDPESSOA = ?",
                 client.getName(),
                 client.getEmail(),
+                client.getRole(),
                 client.getIdPessoa());
     }
 
