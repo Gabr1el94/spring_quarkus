@@ -52,7 +52,8 @@ public class ClientController {
         if (clientBody == null) {
             return new ResponseEntity<>("Preenchimento obrigatório", HttpStatus.PRECONDITION_FAILED);
         }
-        Client client = new Client(clientBody.getName(), clientBody.getEmail());
+        Client client = new Client(clientBody.getName(), clientBody.getEmail(),
+                clientBody.getPassword(), clientBody.getRole());
         int result = clientRepository.addClient(client);
         if (result > 0) {
             return new ResponseEntity<>("Registro do cliente inserido com sucesso", HttpStatus.CREATED);
@@ -91,6 +92,8 @@ public class ClientController {
         }
         findClient.setName(clientBody.getName());
         findClient.setEmail(clientBody.getEmail());
+        findClient.setPassword(clientBody.getPassword());
+        findClient.setRole(clientBody.getRole());
         int result = clientRepository.updateClient(findClient, id);
         if (result > 0) {
             return new ResponseEntity<>("Cliente atualizado com sucesso", HttpStatus.CREATED);

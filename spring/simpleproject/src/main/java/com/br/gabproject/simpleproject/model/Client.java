@@ -25,9 +25,11 @@ public class Client implements Serializable {
     public Client() {
     }
 
-    public Client(String name, String email) {
+    public Client(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.role = RoleEnum.valueOf(role);
     }
 
     /**
