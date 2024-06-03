@@ -104,12 +104,8 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "{" +
-                " idPessoa='" + getIdPessoa() + "'" +
-                ", name='" + getName() + "'" +
-                ", email='" + getEmail() + "'" +
-                ", password='" + getPassword() + "'" +
-                "}";
+        return "Client [idPessoa=" + idPessoa + ", name=" + name + ", email=" + email + ", password=" + password
+                + ", role=" + role + "]";
     }
 
 }
