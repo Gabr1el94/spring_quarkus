@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.gabproject.simpleproject.model.Client;
 import com.br.gabproject.simpleproject.respository.AuthRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +29,15 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Operation(summary = "Authenticator Login", description = "Get check authenticator username and password")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(schema = @Schema(example = "Access is Permited!"), mediaType = "application/json")
+            }),
+            @ApiResponse(responseCode = "401", content = {
+                    @Content(schema = @Schema(example = "Access is Denied!"), mediaType = "application/json")
+            })
+    })
     @GetMapping("/login")
     public ResponseEntity<?> loginAuth(@RequestParam("username") String username,
             @RequestParam("password") String password) {
@@ -36,11 +52,8 @@ public class AuthController {
 
         valid = passwordEncoder.matches(password, cliFind.getPassword());
 
-        if (valid) {
-            return new ResponseEntity<>("Access Permited!", HttpStatus.ACCEPTED);
-        } else {
-            return new ResponseEntity<>("Access is Denied!", HttpStatus.UNAUTHORIZED);
-        }
+        return valid ? new ResponseEntity<>("Access is Permited!", HttpStatus.ACCEPTED)
+                : new ResponseEntity<>("Access is Denied!", HttpStatus.UNAUTHORIZED);
     }
 
 }

@@ -37,8 +37,7 @@ public class ClientController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Operation(summary = "All Clients", description = "Get a Tutorial object by specifying all clients", tags = {
-            "tutorials", "get", "list" })
+    @Operation(summary = "All Clients", description = "Get a Tutorial object by specifying all clients")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = Client.class), mediaType = "application/json")
@@ -47,10 +46,10 @@ public class ClientController {
     @GetMapping("/")
     public ResponseEntity<List<Client>> listAll() {
         List<Client> clients = clientRepository.listAll();
-        System.out.println(clients.size());
         return new ResponseEntity<>(clients, HttpStatus.ACCEPTED);
     }
 
+    @Operation(summary = "Insert a Client", description = "Insert a tutorial new client")
     @PostMapping("/")
     public ResponseEntity<?> addClient(@RequestBody ClientBody clientBody) {
         if (clientBody == null) {
@@ -67,8 +66,7 @@ public class ClientController {
         return new ResponseEntity<>("Falha ao inserir os dados do cliente", HttpStatus.CONFLICT);
     }
 
-    @Operation(summary = "Find Client", description = "Get a Tutorial object by specifying find client by id", tags = {
-            "tutorials", "get", "id" })
+    @Operation(summary = "Find a Client", description = "Get a Tutorial object by specifying find client by id")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = Client.class), mediaType = "application/json")
@@ -85,6 +83,14 @@ public class ClientController {
         return new ResponseEntity<>(client, HttpStatus.ACCEPTED);
     }
 
+    @Operation(summary = "Update a Client", description = "Update client by specifying find client by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", content = {
+                    @Content(schema = @Schema(implementation = Client.class), mediaType = "application/json")
+            }),
+            @ApiResponse(responseCode = "404", description = "Client not found by id", content = {
+                    @Content(schema = @Schema()) }),
+    })
     @PutMapping("/{id}")
     public ResponseEntity<?> updatebyID(@RequestBody ClientBody clientBody, @PathVariable int id) {
 
@@ -101,10 +107,8 @@ public class ClientController {
         findClient.setPassword(clientBody.getPassword());
         findClient.setRole(clientBody.getRole());
         int result = clientRepository.updateClient(findClient, id);
-        if (result > 0) {
-            return new ResponseEntity<>("Cliente atualizado com sucesso", HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>("Falha ao atualizar os dados do cliente", HttpStatus.CONFLICT);
+        return result > 0 ? new ResponseEntity<>("Cliente atualizado com sucesso", HttpStatus.CREATED)
+                : new ResponseEntity<>("Falha ao atualizar os dados do cliente", HttpStatus.CONFLICT);
     }
 
 }
