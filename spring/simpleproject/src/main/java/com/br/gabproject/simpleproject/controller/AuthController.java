@@ -44,7 +44,7 @@ public class AuthController {
         @GetMapping("/login")
         public ResponseEntity<?> loginAuth(
                         @Parameter(description = "Input username form") @RequestParam("username") String username,
-                        @RequestParam("Input password form") String password) {
+                        @Parameter(description = "Input password form") @RequestParam("password") String password) {
 
                 Client cliFind = authRepository.findClientUsernameAndPass(username);
 
