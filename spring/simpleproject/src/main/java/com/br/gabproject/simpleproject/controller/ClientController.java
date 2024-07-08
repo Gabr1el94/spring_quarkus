@@ -16,6 +16,7 @@ import com.br.gabproject.simpleproject.model.domain.ClientBody;
 import com.br.gabproject.simpleproject.respository.ClientRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -75,7 +76,7 @@ public class ClientController {
                     @Content(schema = @Schema()) }),
     })
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> getbyID(@PathVariable int id) {
+    public ResponseEntity<?> getbyID(@Parameter(description = "Search client by id") @PathVariable int id) {
         Client client = clientRepository.findById(id);
         if (client == null) {
             return new ResponseEntity<>("Client not found", HttpStatus.NOT_FOUND);
@@ -92,7 +93,8 @@ public class ClientController {
                     @Content(schema = @Schema()) }),
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatebyID(@RequestBody ClientBody clientBody, @PathVariable int id) {
+    public ResponseEntity<?> updatebyID(@RequestBody ClientBody clientBody,
+            @Parameter(description = "Search client by id") @PathVariable int id) {
 
         if (clientBody == null) {
             return new ResponseEntity<>("Preenchimento obrigatório", HttpStatus.PRECONDITION_FAILED);
