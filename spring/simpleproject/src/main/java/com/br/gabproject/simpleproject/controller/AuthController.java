@@ -46,13 +46,12 @@ public class AuthController {
                         @Parameter(description = "Input username form") @RequestParam("username") String username,
                         @Parameter(description = "Input password form") @RequestParam("password") String password) {
 
+                boolean valid = false;
                 Client cliFind = authRepository.findClientUsernameAndPass(username);
 
                 if (cliFind == null) {
                         return new ResponseEntity<>("Access is Denied!", HttpStatus.UNAUTHORIZED);
                 }
-
-                boolean valid = false;
 
                 valid = passwordEncoder.matches(password, cliFind.getPassword());
 
